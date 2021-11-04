@@ -1,0 +1,136 @@
+Tweet Object
+
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| Attribute                 | Type    | Description                                                              |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| created_at                | String  | UTC time when this Tweet was created. Example:                           |  |  |
+|                           |         | "created_at": "Wed Oct 10 20:19:24 +0000 2018"                           |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| id_str                    | String  | The string representation of the unique identifier for this Tweet.       |  |  |
+|                           |         | Implementations should use this rather than the large integer in         |  |  |
+|                           |         | id. Example:                                                             |  |  |
+|                           |         | "id_str":"1050118621198921728"                                           |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| text                      | String  | Utility used to post the Tweet, as an HTML-formatted string.             |  |  |
+|                           |         | Tweets from the Twitter website have a source value of web.              |  |  |
+|                           |         | Example:                                                                 |  |  |
+|                           |         | "source":"Twitter Web Client"                                            |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| in_reply_to_status_id_str | String  | Nullable.                                                                |  |  |
+|                           |         |  If the represented Tweet is a reply, this field                         |  |  |
+|                           |         |  will contain the string representation                                  |  |  |
+|                           |         | of the original Tweet’s ID. Example:                                     |  |  |
+|                           |         | "in_reply_to_status_id_str":"1051222721923756032"                        |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| quoted_status_id_str      | String  | This field only surfaces when the Tweet is a quote Tweet.                |  |  |
+|                           |         | This is the string representation Tweet ID of the quoted Tweet. Example: |  |  |
+|                           |         | "quoted_status_id_str":"1050119905717055488"                             |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| retweet_count             | Int     | Number of times this Tweet has been retweeted. Example:                  |  |  |
+|                           |         | "retweet_count":160                                                      |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+| favorite_count            | Integer | Nullable. Indicates approximately how many times this Tweet has been     |  |  |
+|                           |         | liked by Twitter users. Example:                                         |  |  |
+|                           |         | "favorite_count":295                                                     |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+|        lang               |  String | Nullable. When present, indicates a BCP 47 language identifier           |  |  |
+|                           |         | corresponding to the machine-detected language of the Tweet text, or     |  |  |
+|                           |         | und if no language could be detected. See more documentation HERE.       |  |  |
+|                           |         | Example:                                                                 |  |  |        
+|                           |         | "lang": "en"                                                             |  |  | 
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+|                           |         |                                                                          |  |  |
++---------------------------+---------+--------------------------------------------------------------------------+--+--+
+
+
+User Object ("user")
+
+
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| Attribute        | Type                  | Description                                                                            |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| id_str           | String                | The string representation of the unique identifier for this User.                      |  |  |
+|                  |                       | Implementations should use this rather than the large,                                 |  |  |
+|                  |                       | possibly un-consumable integer in                                                      |  |  |
+|                  |                       | id. Example:                                                                           |  |  |
+|                  |                       | "id_str": "6253282"                                                                    |  |  |
+|                  |                       |                                                                                        |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| screen_name      | String                | The screen name, handle, or alias that this user identifies themselves with.           |  |  |
+|                  |                       | screen_names are unique but subject to change. Use                                     |  |  |
+|                  |                       |                                                                                        |  |  |
+|                  |                       | id_str                                                                                 |  |  |
+|                  |                       |  as a user identifier whenever possible. Typically a maximum of 15 characters          |  |  |
+|                  |                       | long, but some historical accounts may exist with longer names. Example:               |  |  |
+|                  |                       | "screen_name": "twitterapi"                                                            |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| location         | String                | Nullable                                                                               |  |  |
+|                  |                       |  . The user-defined location for this account’s profile.                               |  |  |
+|                  |                       | Not necessarily a location, nor machine-parseable.                                     |  |  |
+|                  |                       | This field will occasionally be fuzzily interpreted by the Search service. Example:    |  |  |
+|                  |                       | "location": "San Francisco, CA"                                                        |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| derived          | Arrays of Enrichment  | Enterprise APIs only Collection of Enrichment metadata derived for user. Provides the  |  |  |
+|                  | Objects               | Profile Geo Enrichment metadata. See referenced documentation for more information,    |  |  |
+|                  |                       |  including JSON data dictionaries. Example:                                            |  |  |
+|                  |                       | "derived":{"locations": [{"country":"United States","country_code":"US",               |  |  |
+|                  |                       | "locality":"Denver"}]}                                                                 |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| verified         | Boolean               | When true, indicates that the user has a verified account. See                         |  |  |
+|                  |                       | Verified Accounts. Example:                                                            |  |  |
+|                  |                       | "verified": false                                                                      |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| followers_count  | Int                   | The number of followers this account currently has.                                    |  |  |
+|                  |                       | Under certain conditions of duress, this field will                                    |  |  |
+|                  |                       | temporarily indicate “0”. Example:                                                     |  |  |
+|                  |                       | "followers_count": 21                                                                  |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| friends_count    | Int                   | The number of users this account is following                                          |  |  |
+|                  |                       |  (AKA their “followings”). Under certain conditions of duress,                         |  |  |
+|                  |                       |  this field will temporarily indicate “0”. Example:                                    |  |  |
+|                  |                       | "friends_count": 32                                                                    |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+| favourites_count | Int                   | The number of Tweets this user has liked in the account’s                              |  |  |
+|                  |                       |  lifetime. British spelling used in the field name for historical                      |  |  |
+|                  |                       |  reasons. Example:                                                                     |  |  |
+|                  |                       | "favourites_count": 13                                                                 |  |  |
++------------------+-----------------------+----------------------------------------------------------------------------------------+--+--+
+
+
+Entities object ("entities")
+
+
++----------+-----------------+------------------------+--+--+
+| Field    | Type            | Description            |  |  |
++----------+-----------------+------------------------+--+--+
+| hashtags | Array of        | {                      |  |  |
+|          | Hashtag Objects |   "hashtags": [        |  |  |
+|          |                 |     {                  |  |  |
+|          |                 |       "indices": [     |  |  |
+|          |                 |         32,            |  |  |
+|          |                 |         38             |  |  |
+|          |                 |       ],               |  |  |
+|          |                 |       "text": "nodejs" |  |  |
+|          |                 |     }                  |  |  |
+|          |                 |   ]                    |  |  |
+|          |                 | }                      |  |  |
++----------+-----------------+------------------------+--+--+
+|          |                 |                        |  |  |
++----------+-----------------+------------------------+--+--+
+
+
+Place object ("place")
+
+
++--------------+--------+-------------------------------------------------------------------------------------------------+--+--+
+| Field        | Type   | Description                                                                                     |  |  |
++--------------+--------+-------------------------------------------------------------------------------------------------+--+--+
+| id           | String | ID representing this place. Note that this is represented as a string, not an integer. Example: |  |  |
+|              |        | "id":"01a9a39529b27f36"                                                                         |  |  |
++--------------+--------+-------------------------------------------------------------------------------------------------+--+--+
+| full_name    | String | Full human-readable representation of the place’s name. Example:                                |  |  |
+|              |        | "full_name":"Manhattan, NY"                                                                     |  |  |
++--------------+--------+-------------------------------------------------------------------------------------------------+--+--+
+| country_code | String | Shortened country code representing the country containing this place. Example:                 |  |  |
+|              |        | "country_code":"US"                                                                             |  |  |
++--------------+--------+-------------------------------------------------------------------------------------------------+--+--+
